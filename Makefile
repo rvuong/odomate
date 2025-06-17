@@ -7,15 +7,16 @@
 help:
 	@echo "🎨 O.D.O. Mate - Art Detection App - Available commands:"
 #	@echo "  setup        - Full project initialization"
-	@echo "  build        - Build Docker containers"
-	@echo "  up           - Start the application"
-	@echo "  ps           - Check status of the application"
-	@echo "  stop         - Stop the application"
-	@echo "  down         - Stop the application and delete containers"
-	@echo "  logs         - Watch logs of the application"
-	@echo "  clean        - Clean up containers and volumes"
-	@echo "  npm-install  - Install npm dependencies"
-	@echo "  npm-build    - Build the production version of the frontend"
+	@echo "  build         - Build Docker containers"
+	@echo "  up            - Start the application"
+	@echo "  ps            - Check status of the application"
+	@echo "  stop          - Stop the application"
+	@echo "  down          - Stop the application and delete containers"
+	@echo "  logs          - Watch logs of the application"
+	@echo "  clean         - Clean up containers and volumes"
+	@echo "  npm-install   - Install npm dependencies"
+	@echo "  npm-build     - Build the production version of the frontend"
+	@echo "  init-weaviate - Initialize Weaviate with the schema and data"
 
 ## Initialisation du projet
 #setup:
@@ -73,4 +74,6 @@ npm-build:
 #
 #dev-backend:
 #	docker compose up backend postgres redis
-#
+
+init-weaviate:
+	docker compose exec backend bash -c "PYTHONPATH=/app python scripts/init_weaviate.py"

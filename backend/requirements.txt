@@ -41,4 +41,4 @@ python-multipart==0.0.20
 torch
 torchvision
 open_clip_torch
-weaviate-client
+weaviate-client>=4.0.0
