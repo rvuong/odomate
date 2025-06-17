@@ -1,0 +1,44 @@
+# FastAPI et dépendances web
+fastapi==0.115.12
+uvicorn[standard]==0.34.3
+
+# # Base de données
+# psycopg2-binary==2.9.10
+# sqlalchemy==2.0.41
+# alembic==1.16.1
+
+# # Cache Redis
+# redis==6.2.0
+# celery==5.5.3
+
+# # Validation et sérialisation
+# pydantic==2.11.5
+# pydantic-settings==2.9.1
+
+# # Utilitaires
+# python-dotenv==1.1.0
+# httpx==0.28.1
+# aiofiles==24.1.0
+# python-slugify==8.0.4
+
+# # Monitoring et logs
+# structlog==25.4.0
+# sentry-sdk[fastapi]==2.30.0
+
+# # Tests
+# pytest==8.4.0
+# pytest-asyncio==1.0.0
+# pytest-cov==6.2.1
+# httpx==0.28.1
+
+# # Développement
+# black==25.1.0
+# isort==6.0.1
+# flake8==7.2.0
+# mypy==1.16.0
+python-multipart==0.0.20
+# pillow
+torch
+torchvision
+open_clip_torch
+weaviate-client
