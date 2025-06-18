@@ -1,6 +1,5 @@
 import os
 import weaviate
-
 from PIL import Image
 from pathlib import Path
 from services.recognition import extract_image_embedding
@@ -61,7 +60,7 @@ for img_path in sample_dir.glob("*.[jp][pn]g"):
         "embedding": embedding.tolist(),
     }
 
-    client.collections.get("Artwork").data.insert(obj)
+    client.collections.get("Artwork").data.insert(obj, vector=embedding.tolist())
     print(f"✅ \"{img_path.name}\" successfully inserted into Weaviate.")
 
 print("✅ Sample data successfully loaded.")
