@@ -24,7 +24,7 @@ def search_similar_artworks(embedding: list[float], top_k: int = 5):
         collection = client.collections.get("Artwork")
         print(f"Collection used: {collection.name}")
 
-    match = collection.query.near_vector(embedding, limit=1, certainty=0.9).objects
+    match = collection.query.near_vector(embedding, limit=1, certainty=0.8).objects
     print(f"Found {len(match)} matches for the given embedding.")
 
     # Close the client connection

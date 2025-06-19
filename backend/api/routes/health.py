@@ -1,12 +1,12 @@
 import weaviate
 import httpx
-
 from fastapi import APIRouter
 from weaviate.classes.init import Auth
 
+
 router = APIRouter()
 
-@router.get("/api/health")
+@router.get("/health")
 def health_check():
     """Health check endpoint to verify the API is running."""
     try:

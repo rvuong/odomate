@@ -5,6 +5,11 @@ const Camera = ({ onFrameCaptured }) => {
     const videoRef = useRef(null);
 
     useEffect(() => {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            console.error('Camera not supported in this browser.');
+            return;
+        }
+
         navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
             .then(stream => {
                 if (videoRef.current) {

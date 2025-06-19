@@ -1,0 +1,25 @@
+.camera-container {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: black;
+    z-index: 1;
+}
+
+.camera-video {
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.capture-button {
+    position: absolute;
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 16px 24px;
+    font-size: 24px;
+    border-radius: 50%;
+    background: white;
+    border: none;
+    z-index: 2;
+}

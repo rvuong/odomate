@@ -1,15 +1,16 @@
+import io
+import uuid
 from fastapi import APIRouter, File, HTTPException, UploadFile
 from fastapi.responses import JSONResponse
 from pathlib import Path
+from PIL import Image
 from services.recognition import extract_image_embedding
 from services.weaviate_client import search_similar_artworks
-from PIL import Image
-import uuid
-import io
+
 
 router = APIRouter()
 
-@router.post("/api/artpiece", tags=["artworks"])
+@router.post("/artpiece", tags=["artworks"])
 async def upload_image(artpiece: UploadFile = File(...)):
     print(f"📸 Image received: {artpiece.filename}")
 

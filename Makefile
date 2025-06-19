@@ -17,24 +17,20 @@ help:
 	@echo "  npm-install   - Install npm dependencies"
 	@echo "  npm-build     - Build the production version of the frontend"
 	@echo "  init-weaviate - Initialize Weaviate with the schema and data"
-
-## Initialisation du projet
-#setup:
-#	@echo "📁 Création des dossiers..."
-#	mkdir -p frontend backend database uploads logs
-#	@echo "📦 Installation des dépendances npm..."
-#	docker run --rm -v $$(pwd)/frontend:/app -w /app node:18-alpine npm install
-#	@echo "✅ Setup terminé!"
+	@echo "  init-ssl      - Initialize a SSL Certificate for frontend camera availability"
 
 # Build containers
 build:
+	@echo "🔨 Building Docker containers..."
 	docker compose build
+	@echo "✅ Build completed!"
 
 # Start the application
 up:
-	docker compose up -d
+	@echo "🚀 Starting the application..."
+	docker compose up -d --build
 	@echo "🚀 Application started on:"
-	@echo "  Frontend: http://localhost:3000"
+	@echo "  Frontend: https://localhost:3443"
 	@echo "  Backend:  http://localhost:8000"
 	@echo "  Weaviate: http://localhost:8080"
 
@@ -44,12 +40,15 @@ ps:
 
 # Stop the application
 stop:
+	@echo "🛑 Stopping the application..."
 	docker compose stop
+	@echo "🛑 Application stopped."
 
 # Stop the application and delete containers
 down:
+	@echo "🗑️ Stopping and removing containers..."
 	docker compose down
-	#docker volume rm odomate_weaviate_data
+	@echo "🗑️ Application stopped and containers removed."
 
 # Watch logs
 logs:
@@ -68,12 +67,21 @@ npm-install:
 npm-build:
 	docker run --rm -v $$(pwd)/frontend:/app -w /app node:24-alpine npm run build
 
-## Commandes de développement
-#dev-frontend:
-#	docker run --rm -it -v $$(pwd)/frontend:/app -w /app -p 3000:3000 node:18-alpine npm start
-#
-#dev-backend:
-#	docker compose up backend postgres redis
-
+# Initialize Weaviate with schema and sample data
 init-weaviate:
 	docker compose exec backend bash -c "PYTHONPATH=/app python scripts/init_weaviate.py"
+
+# Initialize SSL certificates for frontend
+init-ssl:
+	sudo apt install libnss3-tools
+	curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
+	chmod +x mkcert-v*-linux-amd64
+	sudo mv mkcert-v*-linux-amd64 /usr/local/bin/mkcert
+	mkcert -install
+	@echo "SSL initialization script executed. Check the backend logs for details."
+
+	cd frontend && \
+		mkdir -p certs && \
+		mkcert -key-file certs/key.pem -cert-file certs/cert.pem localhost 127.0.1 ::1 && \
+		cd ..
+	@echo "SSL certificates generated in frontend/certs. You can now run the application with SSL support."
