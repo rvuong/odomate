@@ -6,7 +6,7 @@ from weaviate.classes.init import Auth
 
 router = APIRouter()
 
-@router.get("/health")
+@router.get("/api/health")
 def health_check():
     """Health check endpoint to verify the API is running."""
     try:

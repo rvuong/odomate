@@ -9,16 +9,18 @@ import io
 
 router = APIRouter()
 
-@router.post("/artworks", tags=["artworks"])
-async def upload_image(artwork: UploadFile = File(...)):
-    print(f"📸 Image received: {artwork.filename}")
+@router.post("/api/artpiece", tags=["artworks"])
+async def upload_image(artpiece: UploadFile = File(...)):
+    print(f"📸 Image received: {artpiece.filename}")
 
-    image = Image.open(io.BytesIO(await artwork.read())).convert("RGB")
+    image = Image.open(io.BytesIO(await artpiece.read())).convert("RGB")
     embedding = extract_image_embedding(image).tolist()
 
     results = search_similar_artworks(embedding)
 
     return {
+        "status": "ok",
+        "message": f"The image ({artpiece.filename}) was successfully processed.",
         "matches": [
             {
                 "id": obj.uuid,
@@ -26,6 +28,4 @@ async def upload_image(artwork: UploadFile = File(...)):
             }
             for obj in results
         ],
-        "status": "ok",
-        "message": f"The image ({artwork.filename}) was successfully processed.",
     }
