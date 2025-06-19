@@ -1,0 +1,86 @@
+name: 🚀 Release
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # important for tags
+          persist-credentials: false
+
+      - name: 📦 Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20.10.0
+          cache: 'npm'
+
+      - name: 📥 Install dependencies
+        run: npm ci
+
+      - name: 🏷️ Clean existing tags (if needed)
+        run: |
+          # Supprime les tags locaux et distants qui pourraient poser problème
+          git tag -d v1.0.0 2>/dev/null || true
+          git push origin --delete v1.0.0 2>/dev/null || true
+        continue-on-error: true
+
+      # Version simplifiée - pas besoin de 3 étapes semantic-release
+      - name: 🚀 Semantic Release
+        uses: cycjimmy/semantic-release-action@v4
+        continue-on-error: true  # Ne fait pas échouer le job si pas de release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+        with:
+          semantic_version: 19
+          extra_plugins: |
+            @semantic-release/changelog
+            @semantic-release/git
+
+#      - name: Semantic Release
+#        uses: cycjimmy/semantic-release-action@v4
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#        with:
+#          semantic_version: 19
+#          dry_run: false
+#          extra_plugins: |
+#            @semantic-release/changelog
+#            @semantic-release/git
+#        continue-on-error: false
+#
+#      - name: Semantic Release (Dry Run Check)
+#        id: semantic_check
+#        uses: cycjimmy/semantic-release-action@v4
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#        with:
+#          semantic_version: 19
+#          dry_run: true
+#          extra_plugins: |
+#            @semantic-release/changelog
+#            @semantic-release/git
+#
+#      - name: Semantic Release (Actual)
+#        if: steps.semantic_check.outputs.new_release_published == 'true'
+#        uses: cycjimmy/semantic-release-action@v4
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+#        with:
+#          semantic_version: 19
+#          extra_plugins: |
+#            @semantic-release/changelog
+#            @semantic-release/git
+#
+##      - name: 🚀 Run semantic-release
+##        env:
+##          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+##        run: npx semantic-release

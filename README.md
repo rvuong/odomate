@@ -2,6 +2,11 @@
 
 A mobile-oriented PWA and backend system for real-time artwork recognition.
 
+Designed to help low-sight individuals identify artworks using their smartphone camera, thus regaining a sense of autonomy and independence.
+
+![version](https://img.shields.io/github/v/release/rvuong/odomate?sort=semver&label=version)
+![CI](https://github.com/rvuong/odomate/actions/workflows/main.yml/badge.svg)
+
 ---
 
 ## 📁 Project Structure
