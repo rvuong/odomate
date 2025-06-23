@@ -70,32 +70,42 @@ make up
 
 ### 3. Initialize Weaviate with sample artworks
 ```bash
-make init_weaviate
+make init-weaviate
 ```
 
 ### 4. Test API
 - Upload an image using the frontend (PWA), or
-- Use curl/Postman to POST to `/artworks`
+- Use curl/Postman to POST to `/api/artpiece`
 
 ---
 
 ## 📷 Recognition Endpoint
-### POST `/artworks`
+### POST `/api/artpiece`
 **Body:** Multipart file upload
 ```http
 Content-Type: multipart/form-data
-artwork: <image/jpeg>
+artpiece: <image/jpeg>
 ```
 
 **Returns:**
 ```json
 {
+  "status": "ok",
+  "message": "The image (mona-lisa.jpg) was successfully processed.",
   "matches": [
     {
-      "id": "...",
+      "id": "4b9f07b5-fae5-4239-ae50-b2b350b2a128",
       "properties": {
+        "embedding": [
+          0.055572912096977234,
+          0.06454084068536758,
+          -0.0025106584653258324,
+          ...
+        ],
         "title": "mona-lisa",
-        "artist": "Leonardo da Vinci"
+        "artist": null,
+        "description": null,
+        "year": null
       }
     }
   ]
