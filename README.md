@@ -39,19 +39,20 @@ odomate/
 
 ## 🌐 Overview
 **O.D.O. Mate** is a Progressive Web App for identifying artworks in real time:
-- Uses **camera input** to capture artwork
-- Sends the image to a **FastAPI backend**
-- The backend uses **CLIP** (OpenAI) to extract embeddings
-- **Weaviate** is used as a vector database to store and search artwork vectors
+- Uses **camera input** to capture artworks
+- Gets **artwork identification and description** from the **FastAPI backend**
+  - The backend uses **CLIP** (OpenAI) to extract embeddings
+  - **Weaviate** is used as a vector database to store and search artwork vectors
 
 ---
 
 ## 📚 Features
-- Frontend: React PWA using native camera access
+- Frontend: React PWA using native camera access, allowing users to take photos and require for identification.
+  - Certainty threshold for filtering inaccurate matches
+- Admin Dashboard: React app for staff to manage artworks, and upload new images.
 - Backend: FastAPI API with upload & recognition endpoints
-- CLIP model (ViT-B-32, `laion2b_s34b_b79k`) for image embeddings
-- Weaviate for similarity search based on vector distance
-- Certainty threshold for filtering inaccurate matches
+  - CLIP model (ViT-B-32, `laion2b_s34b_b79k`) for image embeddings
+  - Weaviate for similarity search based on vector distance
 
 ---
 
@@ -68,7 +69,7 @@ cd odomate
 make up
 ```
 
-### 3. Initialize Weaviate with sample artworks
+### 3. 1st boot: initialize Weaviate with sample artworks
 ```bash
 make init-weaviate
 ```
@@ -116,6 +117,7 @@ artpiece: <image/jpeg>
 
 ## 📊 Tech Stack
 - **Frontend**: React, PWA, camera API
+- **Admin** (Staff Dashboard): React
 - **Backend**: FastAPI, Python 3.11, Torch, OpenCLIP
 - **Vector DB**: Weaviate 1.25+
 - **Model**: CLIP ViT-B-32, pretrained on LAION-2B
