@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/rvuong/odomate/compare/v1.0.0...v1.1.0) (2025-06-23)
+
+
+### Features
+
+* add Staff admin dashboard ([72a9bb6](https://github.com/rvuong/odomate/commit/72a9bb6a0a80f5a1696700c9f3d6c06627febf98))
+* add Staff admin dashboard ([853ee91](https://github.com/rvuong/odomate/commit/853ee918f15a7e51f45c83a8ba455574a6fec211))
+
 # 1.0.0 (2025-06-20)
 
 
