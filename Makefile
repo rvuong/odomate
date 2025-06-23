@@ -31,6 +31,7 @@ up:
 	docker compose up -d --build
 	@echo "🚀 Application started on:"
 	@echo "  Frontend: https://localhost:3443"
+	@echo "  Admin:    https://localhost:4443"
 	@echo "  Backend:  http://localhost:8000"
 	@echo "  Weaviate: http://localhost:8080"
 

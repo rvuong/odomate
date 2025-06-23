@@ -1,11 +1,9 @@
 import weaviate
 from weaviate.connect import ConnectionParams
-from weaviate.connect import ConnectionParams
 
-
-def search_similar_artworks(embedding: list[float], top_k: int = 5):
+def get_weaviate_client():
     # Client initialization
-    client = weaviate.WeaviateClient(
+    return weaviate.WeaviateClient(
         connection_params=ConnectionParams.from_params(
             http_host="weaviate",
             http_port=8080,
@@ -16,6 +14,9 @@ def search_similar_artworks(embedding: list[float], top_k: int = 5):
         ),
         skip_init_checks=False,
     )
+
+def search_similar_artworks(embedding: list[float], top_k: int = 5):
+    client = get_weaviate_client()
     client.connect()
 
     # Check connection
@@ -31,3 +32,29 @@ def search_similar_artworks(embedding: list[float], top_k: int = 5):
     client.close()
 
     return match
+
+def get_all_artworks(limit: int = 100, offset: int = 0):
+    client = get_weaviate_client()
+    client.connect()
+
+    # Check connection
+    if client.is_ready():
+        print("Weaviate is ready and connected.")
+        collection = client.collections.get("Artwork")
+        print(f"Collection used: {collection.name}")
+    results = collection.query.fetch_objects(
+        limit=limit,
+        offset=offset,
+        return_metadata=None,  # Set to None to return all metadata
+    )
+
+    # Close the client connection
+    client.close()
+
+    return [
+        {
+            "uuid": item.uuid,
+            **item.properties,
+        }
+        for item in results.objects
+    ]
