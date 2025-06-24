@@ -13,6 +13,17 @@ Designed to help low-sight individuals identify artworks using their smartphone 
 
 ```
 odomate/
+├── admin
+│   ├── certs
+│   ├── node_modules
+│   ├── public
+│   ├── src
+│   ├── Dockerfile
+│   ├── package.json
+│   ├── package-lock.json
+│   ├── README.md
+│   └── tsconfig.json
+├── backend
 ├── backend/
 │   ├── api/
 │   │   └── routes/           # FastAPI route handlers
