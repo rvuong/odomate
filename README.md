@@ -37,7 +37,7 @@ odomate/
 
 ---
 
-## 🌐 Overview
+## 🗺️ Overview
 **O.D.O. Mate** is a Progressive Web App for identifying artworks in real time:
 - Uses **camera input** to capture artworks
 - Gets **artwork identification and description** from the **FastAPI backend**
@@ -115,7 +115,7 @@ artpiece: <image/jpeg>
 
 ---
 
-## 📊 Tech Stack
+## 🛠️ Tech Stack
 - **Frontend**: React, PWA, camera API
 - **Admin** (Staff Dashboard): React
 - **Backend**: FastAPI, Python 3.11, Torch, OpenCLIP
@@ -134,7 +134,7 @@ artpiece: <image/jpeg>
 
 ---
 
-## 📅 License
+## 📜 License
 MIT - see LICENSE file.
 
 ---
