@@ -1,8 +1,8 @@
 services:
-  # Frontend React PWA
-  frontend:
+  # Public Frontend PWA
+  frontend-public:
     build:
-      context: ./frontend
+      context: ./frontend-public
       dockerfile: Dockerfile
       target: development
     ports:
@@ -15,18 +15,18 @@ services:
       - SSL_CRT_FILE=/app/certs/cert.pem
       - SSL_KEY_FILE=/app/certs/key.pem
     volumes:
-      - ./frontend:/app
-      - ./frontend/certs:/app/certs:ro
+      - ./frontend-public:/app
+      - ./frontend-public/certs:/app/certs:ro
       - /app/node_modules
     depends_on:
       - backend
     networks:
       - art-detection-network
 
-  # Admin Dashboard
-  admin:
+  # Administrators' Dashboard
+  frontend-admin:
     build:
-      context: ./admin
+      context: ./frontend-admin
       dockerfile: Dockerfile
       target: development
     ports:
@@ -39,14 +39,14 @@ services:
       - SSL_CRT_FILE=/app/certs/cert.pem
       - SSL_KEY_FILE=/app/certs/key.pem
     volumes:
-      - ./admin:/app
+      - ./frontend-admin:/app
       - /app/node_modules
     depends_on:
       - backend
     networks:
       - art-detection-network
 
-  # Backend Python FastAPI
+  # Backend API using Python FastAPI
   backend:
     build:
       context: ./backend

@@ -1,6 +1,7 @@
+import logging
 from fastapi import FastAPI, Request
 from api.routes import admin, artpiece, health
-import logging
+
 
 app = FastAPI()
 

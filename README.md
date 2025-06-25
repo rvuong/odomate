@@ -9,20 +9,32 @@ Designed to help low-sight individuals identify artworks using their smartphone 
 
 ---
 
+## 🗺️ Overview
+**O.D.O. Mate** helps museum visitors to identify artworks in real time.
+It is composed of:
+- A Progressive Web App (PWA) that runs on smartphones
+  - Uses the **native camera API** to capture images of artworks
+  - Provides a user-friendly interface for identification
+- An **admin dashboard** for museum staff to manage artworks
+  - Allows listing images and metadata
+- A backend service built with **FastAPI**
+  - Handles image uploads and recognition requests
+  - Uses **CLIP** (OpenAI) for image embeddings
+  - Stores and searches artwork vectors in **Weaviate**
+- A **Weaviate** vector database for similarity search
+
+---
+
 ## 📁 Project Structure
 
 ```
 odomate/
 ├── admin
-│   ├── certs
-│   ├── node_modules
 │   ├── public
 │   ├── src
 │   ├── Dockerfile
 │   ├── package.json
-│   ├── package-lock.json
-│   ├── README.md
-│   └── tsconfig.json
+│   └── package-lock.json
 │
 ├── backend/
 │   ├── api/
@@ -36,24 +48,14 @@ odomate/
 │
 ├── frontend/
 │   ├── public/
-│   ├── src/                 # React PWA source
+│   ├── src/
+│   ├── Dockerfile
 │   ├── package.json
-│   ├── package-lock.json
-│   └── Dockerfile
+│   └── package-lock.json
 │
 ├── compose.yaml             # Runs frontend, backend, weaviate
-├── Makefile                 # Optional shortcuts for build/run/init
-└── README.md
+└── Makefile                 # Optional shortcuts for build/run/init
 ```
-
----
-
-## 🗺️ Overview
-**O.D.O. Mate** is a Progressive Web App for identifying artworks in real time:
-- Uses **camera input** to capture artworks
-- Gets **artwork identification and description** from the **FastAPI backend**
-  - The backend uses **CLIP** (OpenAI) to extract embeddings
-  - **Weaviate** is used as a vector database to store and search artwork vectors
 
 ---
 
@@ -87,7 +89,7 @@ make init-weaviate
 
 ### 4. Test API
 - Upload an image using the frontend (PWA), or
-- Use curl/Postman to POST to `/api/artpiece`
+- Use curl/Postman to POST to `/api/artpiece` and check the response.
 
 ---
 

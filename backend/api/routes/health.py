@@ -1,5 +1,5 @@
-import weaviate
 import httpx
+import weaviate
 from fastapi import APIRouter
 from weaviate.classes.init import Auth
 

@@ -6,7 +6,6 @@
 # Aide
 help:
 	@echo "🎨 O.D.O. Mate - Art Detection App - Available commands:"
-#	@echo "  setup        - Full project initialization"
 	@echo "  build         - Build Docker containers"
 	@echo "  up            - Start the application"
 	@echo "  ps            - Check status of the application"
@@ -21,19 +20,19 @@ help:
 
 # Build containers
 build:
-	@echo "🔨 Building Docker containers..."
-	docker compose build
+	@echo "Building Docker containers..."
+	docker compose build --no-cache
 	@echo "✅ Build completed!"
 
 # Start the application
 up:
-	@echo "🚀 Starting the application..."
+	@echo "Starting the application..."
 	docker compose up -d --build
 	@echo "🚀 Application started on:"
-	@echo "  Frontend: https://localhost:3443"
-	@echo "  Admin:    https://localhost:4443"
-	@echo "  Backend:  http://localhost:8000"
-	@echo "  Weaviate: http://localhost:8080"
+	@echo "   - Weaviate:        http://localhost:8080"
+	@echo "   - Backend:         http://localhost:8000"
+	@echo "   - Public Frontend: https://localhost:3443"
+	@echo "   - Admin Frontend:  https://localhost:4443"
 
 # Check status of the application
 ps:
@@ -41,13 +40,13 @@ ps:
 
 # Stop the application
 stop:
-	@echo "🛑 Stopping the application..."
+	@echo "Stopping the application..."
 	docker compose stop
 	@echo "🛑 Application stopped."
 
 # Stop the application and delete containers
 down:
-	@echo "🗑️ Stopping and removing containers..."
+	@echo "Stopping and removing containers..."
 	docker compose down
 	@echo "🗑️ Application stopped and containers removed."
 
