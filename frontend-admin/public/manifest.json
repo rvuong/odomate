@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "ODO Mate Admin",
+  "name": "O.D.O. Mate - Art Detection - Admin",
   "icons": [
     {
       "src": "favicon.ico",

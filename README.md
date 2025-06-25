@@ -29,26 +29,30 @@ It is composed of:
 
 ```
 odomate/
-├── admin
-│   ├── public
-│   ├── src
-│   ├── Dockerfile
-│   ├── package.json
-│   └── package-lock.json
-│
 ├── backend/
 │   ├── api/
 │   │   └── routes/           # FastAPI route handlers
-│   ├── models/               
 │   ├── scripts/              # Weaviate schema/data initialization
 │   ├── services/             # CLIP, Weaviate, image processing
 │   ├── Dockerfile
 │   ├── main.py
 │   └── requirements.txt
 │
-├── frontend/
+├── frontend-admin/
+│   ├── certs/
 │   ├── public/
 │   ├── src/
+│   │   └── components/
+│   ├── Dockerfile
+│   ├── package.json
+│   └── package-lock.json
+│
+├── frontend-public/
+│   ├── certs/
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   └── hooks/
 │   ├── Dockerfile
 │   ├── package.json
 │   └── package-lock.json
