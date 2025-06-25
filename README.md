@@ -23,7 +23,7 @@ odomate/
 │   ├── package-lock.json
 │   ├── README.md
 │   └── tsconfig.json
-├── backend
+│
 ├── backend/
 │   ├── api/
 │   │   └── routes/           # FastAPI route handlers
@@ -111,8 +111,7 @@ artpiece: <image/jpeg>
         "embedding": [
           0.055572912096977234,
           0.06454084068536758,
-          -0.0025106584653258324,
-          ...
+          -0.0025106584653258324
         ],
         "title": "mona-lisa",
         "artist": null,
