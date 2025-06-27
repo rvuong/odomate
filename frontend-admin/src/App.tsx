@@ -1,7 +1,7 @@
 import './App.css';
 import React, {useEffect, useState} from "react";
+import AddArtworkForm from "./components/AddArtworkForm";
 import ArtworkTable from "./components/ArtworkTable";
-
 
 const App = () => {
     const [artworks, setArtworks] = useState<any[]>([]);
@@ -27,6 +27,9 @@ const App = () => {
         <div>
             <h1>🎨 Museum Artwork Admin</h1>
             <ArtworkTable artworks={artworks} />
+            <AddArtworkForm onSuccess={function(): void {
+                throw new Error('Function not implemented.');
+            } } />
         </div>
     )
 }
