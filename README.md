@@ -151,7 +151,7 @@ artpiece: <image/jpeg>
 ---
 
 ## 📜 License
-MIT - see LICENSE file.
+MIT - see [LICENSE file](./LICENSE.md).
 
 ---
 
