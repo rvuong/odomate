@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/rvuong/odomate/compare/v1.2.0...v1.3.0) (2025-06-27)
+
+
+### Features
+
+* refresh list after upload ([1f59919](https://github.com/rvuong/odomate/commit/1f59919907f6e23489f7264b8468ec6b97c9b924))
+
 # [1.2.0](https://github.com/rvuong/odomate/compare/v1.1.0...v1.2.0) (2025-06-27)
 
 
