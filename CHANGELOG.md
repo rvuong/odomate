@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/rvuong/odomate/compare/v1.1.0...v1.2.0) (2025-06-27)
+
+
+### Features
+
+* add Artwork Form in order to add new data ([b5bdd99](https://github.com/rvuong/odomate/commit/b5bdd9957b09719ca149e985043228457b7c39f6))
+
 # [1.1.0](https://github.com/rvuong/odomate/compare/v1.0.0...v1.1.0) (2025-06-23)
 
 
