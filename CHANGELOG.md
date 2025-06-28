@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/rvuong/odomate/compare/v1.3.0...v1.4.0) (2025-06-28)
+
+
+### Features
+
+* add a 'delete artwork' feature on the admin dashboard ([20dddde](https://github.com/rvuong/odomate/commit/20dddde45e38a0625b7e0226b680d2427b775027))
+
 # [1.3.0](https://github.com/rvuong/odomate/compare/v1.2.0...v1.3.0) (2025-06-27)
 
 
