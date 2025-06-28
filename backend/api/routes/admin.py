@@ -1,4 +1,4 @@
-from fastapi import APIRouter, File, Form, Query, UploadFile
+from fastapi import APIRouter, File, Form, HTTPException, Path, Query, UploadFile
 from typing import List
 from services.recognition import extract_image_embedding
 from services.weaviate_client import get_all_artworks, get_weaviate_client
@@ -41,3 +41,26 @@ async def add_artwork(
     client.close()
 
     return {"status": "ok"}
+
+@router.delete("/admin/artworks/{artwork_id}", tags=["artworks"])
+async def delete_artwork(artwork_id: str = Path(...)) -> dict:
+    client = get_weaviate_client()
+    client.connect()
+    collection = client.collections.get("Artwork")
+
+    # Delete the artwork by UUID
+    try:
+        #collection.data.delete(uuid=artwork_id)
+        #client.collections.delete(name="Artwork", uuid=artwork_id)
+        collection.data.delete_by_id(artwork_id)
+        print(f"Deleted artwork with ID: {artwork_id}")
+        client.close()
+        return {"status": "ok", "deleted_artwork_id": artwork_id}
+    except Exception as e:
+        print(f"Error deleting artwork with ID {artwork_id}: {e}")
+
+        client.close()
+        raise HTTPException(
+            status_code=404,
+            detail=f"Artwork with ID {artwork_id} not found."
+        )
