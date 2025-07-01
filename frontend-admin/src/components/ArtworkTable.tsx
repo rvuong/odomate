@@ -5,16 +5,17 @@ type Artwork = {
     uuid: string;
     title: string;
     artist?: string;
-    description: string;
-    year: number;
+    year?: number;
+    description?: string;
 }
 
 type Props = {
     artworks: Artwork[];
     onDelete: (id: string) => void; // ✅ Ajout obligatoire
+    onEdit: (artwork: Artwork) => void;
 };
 
-const ArtworkTable: React.FC<Props> = ({artworks, onDelete}) => (
+const ArtworkTable: React.FC<Props> = ({artworks, onDelete, onEdit}) => (
     <table>
         <thead>
         <tr>
@@ -27,13 +28,14 @@ const ArtworkTable: React.FC<Props> = ({artworks, onDelete}) => (
         </thead>
         <tbody>
         {artworks.map((a, i) => (
-            <tr key={i}>
-                <td>{a.title}</td>
-                <td>{a.description}</td>
-                <td>{a.artist}</td>
-                <td>{a.year}</td>
+            <tr key={i} style={{ cursor: 'pointer' }}>
+                <td align={"left"} onClick={() => onEdit(a)}>- {a.title}</td>
+                <td align={"left"} onClick={() => onEdit(a)}>- {a.description}</td>
+                <td align={"left"} onClick={() => onEdit(a)}>- {a.artist}</td>
+                <td onClick={() => onEdit(a)}>{a.year}</td>
                 <td>
                     <button onClick={() => {
+                        // eslint-disable-next-line no-restricted-globals
                         if (confirm(`Are you sure you want to delete ${a.title}?`)) {
                             onDelete(a.uuid);
                         }

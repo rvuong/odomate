@@ -6,9 +6,6 @@ from services.recognition import extract_image_embedding
 from weaviate.connect import ConnectionParams
 from weaviate.classes.config import Configure, DataType, Property
 
-# WEAVIATE_URL = "weaviate"
-# CLASS_NAME = "Artwork"
-
 print("Initializing Weaviate...")
 
 sample_dir = Path("scripts/sample")
@@ -57,6 +54,9 @@ for img_path in sample_dir.glob("*.[jp][pn]g"):
 
     obj = {
         "title": img_path.stem,
+        "artist": "Sample Artist",
+        "year": 2023,
+        "description": f"This is a sample artwork titled \"{img_path.stem}\".",
         "embedding": embedding.tolist(),
     }
 
