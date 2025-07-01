@@ -25,6 +25,12 @@ It is composed of:
 
 ---
 
+## 🗺️ Architecture
+
+![Architecture Diagram](./docs/architecture.drawio.png)
+
+🔗 [Edit this diagram on diagrams.net](https://app.diagrams.net/?url=https://raw.githubusercontent.com/rvuong/odomate/main/docs/architecture.drawio)
+
 ## 📁 Project Structure
 
 ```
