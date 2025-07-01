@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/rvuong/odomate/compare/v1.4.0...v1.5.0) (2025-07-01)
+
+
+### Features
+
+* add update feature for artworks ([ea57f94](https://github.com/rvuong/odomate/commit/ea57f94e02ee5fdaa222240311d7d6114c5399ca))
+
 # [1.4.0](https://github.com/rvuong/odomate/compare/v1.3.0...v1.4.0) (2025-06-28)
 
 
