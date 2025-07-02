@@ -1,13 +1,13 @@
 import React, {useMemo, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import {CssBaseline, ThemeProvider} from '@mui/material';
+import {CssBaseline, ThemeProvider, responsiveFontSizes} from '@mui/material';
 import {getTheme} from './theme';
 
 const Root = () => {
     const [mode, setMode] = useState<'light' | 'dark'>('dark');
 
-    const theme = useMemo(() => getTheme(mode), [mode]);
+    const theme = responsiveFontSizes(useMemo(() => getTheme(mode), [mode]));
 
     return (
         <ThemeProvider theme={theme}>

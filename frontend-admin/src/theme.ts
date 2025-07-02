@@ -17,6 +17,7 @@ export const getTheme = (mode: PaletteMode) =>
         },
         typography: {
             fontFamily: '"Roboto", "Helvetica", sans-serif',
+            fontSize: 16 * 1.3,
             h1: {
                 fontSize: '2.2rem',
                 fontWeight: 500,
@@ -32,5 +33,27 @@ export const getTheme = (mode: PaletteMode) =>
             body1: {
                 fontSize: '1rem',
             },
-        }
+        },
+        components: {
+            MuiButton: {
+                styleOverrides: {
+                    root: {
+                        fontSize: '1rem', // override bouton
+                        padding: '12px 24px',
+                    },
+                },
+            },
+            MuiTableCell: {
+                styleOverrides: {
+                    root: {
+                        fontSize: '1.2rem',
+                    },
+                },
+            },
+            MuiTextField: {
+                defaultProps: {
+                    size: 'medium',
+                },
+            },
+        },
     });
