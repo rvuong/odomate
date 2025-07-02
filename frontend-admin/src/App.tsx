@@ -1,11 +1,16 @@
-import './App.css';
 import React, {useCallback, useEffect, useState} from "react";
+import {Box, Container, FormControlLabel, Switch, Typography} from "@mui/material";
 import AddArtworkForm from "./components/AddArtworkForm";
 import ArtworkTable from "./components/ArtworkTable";
 import EditArtworkModal from "./components/EditArtworkModal";
 
 
-const App = () => {
+type Props = {
+    toggleMode?: () => void; // Optional for theme toggle
+    mode?: 'light' | 'dark'; // Optional for theme mode
+};
+
+const App: React.FC<Props> = ({toggleMode, mode}) => {
     const [artworks, setArtworks] = useState<any[]>([]);
     const [selectedArtwork, setSelectedArtwork] = useState<any | null>(null); // Placeholder for potential future state
 
@@ -43,9 +48,25 @@ const App = () => {
     };
 
     return (
-        <div className="App">
-            <h1>🎨 Museum Artwork Admin</h1>
+        <Container>
+            <Box
+                display="flex"
+                justifyContent="space-around"
+                alignItems="center"
+                mt={4}
+                mb={2}
+            >
+                <Typography variant="h4" component="h1">
+                    Museum Artwork Admin
+                </Typography>
+                <FormControlLabel
+                    control={<Switch checked={mode === 'dark'} onChange={toggleMode}/>}
+                    label={mode === 'dark' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+                />
+            </Box>
+
             <ArtworkTable artworks={artworks} onDelete={deleteArtwork} onEdit={setSelectedArtwork}/>
+            <AddArtworkForm onSuccess={fetchArtworks}/>
             {selectedArtwork && (
                 <EditArtworkModal
                     artwork={selectedArtwork}
@@ -54,9 +75,27 @@ const App = () => {
                     onDeleted={fetchArtworks}
                 />
             )}
-            <AddArtworkForm onSuccess={fetchArtworks}/>
-        </div>
-    )
-}
+        </Container>
+    );
+};
+
+// const App = () => {
+//
+//     return (
+//         <div className="App">
+//             <h1>🎨 Museum Artwork Admin</h1>
+//             <ArtworkTable artworks={artworks} onDelete={deleteArtwork} onEdit={setSelectedArtwork}/>
+//             {selectedArtwork && (
+//                 <EditArtworkModal
+//                     artwork={selectedArtwork}
+//                     onClose={() => setSelectedArtwork(null)}
+//                     onUpdated={fetchArtworks}
+//                     onDeleted={fetchArtworks}
+//                 />
+//             )}
+//             <AddArtworkForm onSuccess={fetchArtworks}/>
+//         </div>
+//     )
+// }
 
 export default App;

@@ -1,4 +1,7 @@
 import React, {useState} from "react";
+import {
+    Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField
+} from '@mui/material';
 
 type Props = {
     artwork: any;
@@ -8,7 +11,12 @@ type Props = {
 };
 
 const EditArtworkModal: React.FC<Props> = ({artwork, onClose, onUpdated, onDeleted}) => {
-    const [form, setForm] = useState({...artwork});
+    const [form, setForm] = useState({
+        title: artwork.title || '',
+        artist: artwork.artist || '',
+        year: artwork.year || '',
+        description: artwork.description || ''
+    });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const {name, value} = e.target;
@@ -45,19 +53,51 @@ const EditArtworkModal: React.FC<Props> = ({artwork, onClose, onUpdated, onDelet
     };
 
     return (
-        <div className="modal">
-            <h2>Modifier les données de l'oeuvre</h2>
-            <input name="title" value={form.title} onChange={handleChange}/>
-            <input name="artist" value={form.artist || ""} onChange={handleChange}/>
-            <input name="year" value={form.year || ""} onChange={handleChange}/>
-            <textarea name="description" value={form.description || ""} onChange={handleChange}/>
+        <Dialog open onClose={onClose} maxWidth="sm" fullWidth>
+            <DialogTitle>Modifier l'œuvre</DialogTitle>
+            <DialogContent>
+                <Stack spacing={2} mt={1}>
+                    <TextField
+                        label="Titre"
+                        name="title"
+                        value={form.title}
+                        onChange={handleChange}
+                        fullWidth
+                        required
+                    />
+                    <TextField
+                        label="Artiste"
+                        name="artist"
+                        value={form.artist}
+                        onChange={handleChange}
+                        fullWidth
+                    />
+                    <TextField
+                        label="Année"
+                        name="year"
+                        value={form.year}
+                        onChange={handleChange}
+                        fullWidth
+                    />
+                    <TextField
+                        label="Description"
+                        name="description"
+                        value={form.description || 'xxxx'}
+                        onChange={handleChange}
+                        multiline
+                        rows={3}
+                        fullWidth
+                        required
+                    />
+                </Stack>
+            </DialogContent>
 
-            <div className="buttons">
-                <button onClick={handleUpdate}>Enregistrer</button>
-                <button onClick={onClose}>Annuler</button>
-                <button onClick={handleDelete} style={{color: "red"}}>Supprimer</button>
-            </div>
-        </div>
+            <DialogActions>
+                <Button onClick={onClose}>Annuler</Button>
+                <Button onClick={handleDelete} color="error">Supprimer</Button>
+                <Button onClick={handleUpdate} variant="contained">Enregistrer</Button>
+            </DialogActions>
+        </Dialog>
     );
 }
 

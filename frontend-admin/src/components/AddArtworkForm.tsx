@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import './AddArtworkForm.css';
+import {Alert, Box, Button, Stack, TextField, Typography} from '@mui/material';
 
 type Props = { onSuccess: () => void };
 
@@ -67,18 +67,42 @@ const AddArtworkForm: React.FC<Props> = ({onSuccess}) => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input name="title" placeholder="Title" value={form.title} onChange={handleChange}/>
-            <textarea name="description" placeholder="Description" value={form.description} onChange={handleChange}/>
-            <input type="file" accept="image/*" onChange={handleFileChange}/>
-            <button type="submit">Valider</button>
+        <Box component="form" onSubmit={handleSubmit} sx={{mt: 4}}>
+            <Typography variant="h6" gutterBottom>Ajouter une œuvre</Typography>
+            <Stack spacing={2}>
+                <TextField
+                    label="Titre"
+                    name="title"
+                    value={form.title}
+                    onChange={handleChange}
+                    fullWidth
+                    required
+                />
+                <TextField
+                    label="Description"
+                    name="description"
+                    value={form.description}
+                    onChange={handleChange}
+                    multiline
+                    rows={3}
+                    fullWidth
+                    required
+                />
+                <Button variant="outlined" component="label">
+                    Sélectionner une image
+                    <input type="file" hidden accept="image/*" onChange={handleFileChange}/>
+                </Button>
+                <Button type="submit" variant="contained" color="primary">
+                    Valider
+                </Button>
 
-            {message && (
-                <div className={`message ${messageType}`}>
-                    {message}
-                </div>
-            )}
-        </form>
+                {message && (
+                    <Alert severity={messageType === 'success' ? 'success' : 'error'}>
+                        {message}
+                    </Alert>
+                )}
+            </Stack>
+        </Box>
     );
 };
 
