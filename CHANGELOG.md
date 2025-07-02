@@ -1,3 +1,11 @@
+# [1.7.0](https://github.com/rvuong/odomate/compare/v1.6.0...v1.7.0) (2025-07-02)
+
+
+### Features
+
+* add Chakra UI as a design system for public frontend ([7cb3941](https://github.com/rvuong/odomate/commit/7cb39416c8fc192643380cd26c6a8d3e43484c36))
+* change order of inputs in the Add Artwork Form ([d18e4a6](https://github.com/rvuong/odomate/commit/d18e4a6418f74b045171366f4b3b40af00d075b8))
+
 # [1.6.0](https://github.com/rvuong/odomate/compare/v1.5.0...v1.6.0) (2025-07-02)
 
 
