@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/rvuong/odomate/compare/v1.7.0...v1.8.0) (2025-07-02)
+
+
+### Features
+
+* make fonts bigger so that the admin is more easily readable ([5678063](https://github.com/rvuong/odomate/commit/5678063feb78f54c0f506fd3bf3715f438caf48d))
+
 # [1.7.0](https://github.com/rvuong/odomate/compare/v1.6.0...v1.7.0) (2025-07-02)
 
 
