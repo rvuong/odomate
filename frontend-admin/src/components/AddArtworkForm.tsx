@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import {Alert, Box, Button, Stack, TextField, Typography} from '@mui/material';
 
+
 type Props = { onSuccess: () => void };
 
 const AddArtworkForm: React.FC<Props> = ({onSuccess}) => {
@@ -10,7 +11,6 @@ const AddArtworkForm: React.FC<Props> = ({onSuccess}) => {
         file: null as File | null,
     });
 
-    // const [preview, setPreview] = useState<string | null>(null);
     const [message, setMessage] = useState<string | null>(null);
     const [messageType, setMessageType] = useState<"success" | "error" | null>(null);
 

@@ -1,22 +1,8 @@
-import React, { useMemo, useState } from 'react';
+import React, {useMemo, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import {CssBaseline, ThemeProvider, createTheme} from '@mui/material';
-import { getTheme } from './theme';
-
-
-// const theme = createTheme();
-//
-// const root = ReactDOM.createRoot(
-//     document.getElementById('root') as HTMLElement
-// );
-// root.render(
-//     <React.StrictMode>
-//         <ThemeProvider theme={theme}>
-//             <App/>
-//         </ThemeProvider>
-//     </React.StrictMode>
-// );
+import {CssBaseline, ThemeProvider} from '@mui/material';
+import {getTheme} from './theme';
 
 const Root = () => {
     const [mode, setMode] = useState<'light' | 'dark'>('dark');
@@ -25,8 +11,8 @@ const Root = () => {
 
     return (
         <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <App toggleMode={() => setMode(mode === 'dark' ? 'light' : 'dark')} mode={mode} />
+            <CssBaseline/>
+            <App toggleMode={() => setMode(mode === 'dark' ? 'light' : 'dark')} mode={mode}/>
         </ThemeProvider>
     );
 };
@@ -35,7 +21,7 @@ ReactDOM.createRoot(
     document.getElementById('root')!
 ).render(
     <React.StrictMode>
-        <Root />
+        <Root/>
     </React.StrictMode>
 );
 

@@ -17,7 +17,6 @@ services:
     volumes:
       - ./frontend-public:/app
       - ./frontend-public/certs:/app/certs:ro
-      - /app/node_modules
     depends_on:
       - backend
     networks:
@@ -40,7 +39,6 @@ services:
       - SSL_KEY_FILE=/app/certs/key.pem
     volumes:
       - ./frontend-admin:/app
-      - /app/node_modules
     depends_on:
       - backend
     networks:

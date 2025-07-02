@@ -39,7 +39,7 @@ const EditArtworkModal: React.FC<Props> = ({artwork, onClose, onUpdated, onDelet
     };
 
     const handleDelete = async () => {
-        if (!confirm(`Supprimer "${artwork.title}" ?`)) return;
+        if (!window.confirm(`Supprimer "${artwork.title}" ?`)) return;
 
         const res = await fetch(`/api/admin/artworks/${artwork.uuid}`, {
             method: "DELETE",
@@ -82,7 +82,7 @@ const EditArtworkModal: React.FC<Props> = ({artwork, onClose, onUpdated, onDelet
                     <TextField
                         label="Description"
                         name="description"
-                        value={form.description || 'xxxx'}
+                        value={form.description || ''}
                         onChange={handleChange}
                         multiline
                         rows={3}

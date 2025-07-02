@@ -79,23 +79,4 @@ const App: React.FC<Props> = ({toggleMode, mode}) => {
     );
 };
 
-// const App = () => {
-//
-//     return (
-//         <div className="App">
-//             <h1>🎨 Museum Artwork Admin</h1>
-//             <ArtworkTable artworks={artworks} onDelete={deleteArtwork} onEdit={setSelectedArtwork}/>
-//             {selectedArtwork && (
-//                 <EditArtworkModal
-//                     artwork={selectedArtwork}
-//                     onClose={() => setSelectedArtwork(null)}
-//                     onUpdated={fetchArtworks}
-//                     onDeleted={fetchArtworks}
-//                 />
-//             )}
-//             <AddArtworkForm onSuccess={fetchArtworks}/>
-//         </div>
-//     )
-// }
-
 export default App;
