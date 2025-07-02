@@ -1,3 +1,11 @@
+# [1.6.0](https://github.com/rvuong/odomate/compare/v1.5.0...v1.6.0) (2025-07-02)
+
+
+### Features
+
+* add beautiful design system to Admin Frontend ([fe3fbd9](https://github.com/rvuong/odomate/commit/fe3fbd9a4456a1099e41f7c890e83f68a11c7916))
+* sort artworks by title in Frontend Admin ([4bdaddb](https://github.com/rvuong/odomate/commit/4bdaddbb4ed33d9e8c95948ae7e5940a05fae163))
+
 # [1.5.0](https://github.com/rvuong/odomate/compare/v1.4.0...v1.5.0) (2025-07-01)
 
 
