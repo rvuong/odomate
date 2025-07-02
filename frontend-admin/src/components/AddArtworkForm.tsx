@@ -70,6 +70,10 @@ const AddArtworkForm: React.FC<Props> = ({onSuccess}) => {
         <Box component="form" onSubmit={handleSubmit} sx={{mt: 4}}>
             <Typography variant="h6" gutterBottom>Ajouter une œuvre</Typography>
             <Stack spacing={2}>
+                <Button variant="outlined" component="label">
+                    Sélectionner une image
+                    <input type="file" hidden accept="image/*" onChange={handleFileChange}/>
+                </Button>
                 <TextField
                     label="Titre"
                     name="title"
@@ -88,10 +92,6 @@ const AddArtworkForm: React.FC<Props> = ({onSuccess}) => {
                     fullWidth
                     required
                 />
-                <Button variant="outlined" component="label">
-                    Sélectionner une image
-                    <input type="file" hidden accept="image/*" onChange={handleFileChange}/>
-                </Button>
                 <Button type="submit" variant="contained" color="primary">
                     Valider
                 </Button>
