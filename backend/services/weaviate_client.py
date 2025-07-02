@@ -42,10 +42,15 @@ def get_all_artworks(limit: int = 100, offset: int = 0):
         print("Weaviate is ready and connected.")
         collection = client.collections.get("Artwork")
         print(f"Collection used: {collection.name}")
+
     results = collection.query.fetch_objects(
         limit=limit,
         offset=offset,
         return_metadata=None,  # Set to None to return all metadata
+    )
+    sorted_results = sorted(
+        results.objects,
+        key=lambda x: x.properties.get("title").lower(),  # Sort by title
     )
 
     # Close the client connection
@@ -56,5 +61,5 @@ def get_all_artworks(limit: int = 100, offset: int = 0):
             "uuid": item.uuid,
             **item.properties,
         }
-        for item in results.objects
+        for item in sorted_results
     ]
