@@ -1,5 +1,6 @@
 import React from "react";
 import {IconButton, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
+// @ts-ignore
 import DeleteIcon from "@mui/icons-material/Delete";
 
 type Artwork = {
