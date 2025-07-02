@@ -1,36 +1,54 @@
 import React from "react";
-import "./ResultOverlay.css";
+import {
+    Box,
+    Text,
+    Button,
+    VStack,
+    Icon,
+} from "@chakra-ui/react";
+import {CheckCircleIcon, WarningIcon} from "@chakra-ui/icons";
 
-const ResultOverlay = ({ matches, error, onClose }) => {
-    if (!matches && !error) return null;
+const ResultOverlay = ({matches, error, onClose}) => {
+    const artwork = matches && matches.length > 0 ? matches[0] : null;
 
-    const first = matches?.[0];
+    const isNoMatch = !artwork || error;
 
     return (
-        <div className="overlay">
-            <div className="card">
-                <button onClick={onClose}>✖</button>
-                {error && <p>{error}</p>}
-                {matches?.length === 0 && <p>No known artwork found.</p>}
-                {first && (
+        <Box
+            position="absolute"
+            top={0}
+            left={0}
+            w="100%"
+            h="100%"
+            bg="blackAlpha.800"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            zIndex={1000}
+            p={6}
+        >
+            <VStack spacing={4} textAlign="center" color="white">
+                {isNoMatch ? (
                     <>
-                        <h2>🎨 {first.properties.title}</h2>
-                        <p>🧑‍🎨 {first.properties.artist}</p>
-                        {matches.length > 1 && (
-                            <ul>
-                                {matches.slice(1).map((m, i) => (
-                                    <li key={i}>
-                                        <button onClick={() => alert(JSON.stringify(m.properties))}>
-                                            {m.properties.title}
-                                        </button>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
+                        <Icon as={WarningIcon} w={10} h={10} color="red.300"/>
+                        <Text fontSize="2xl" fontWeight="bold">Aucune œuvre reconnue</Text>
+                        {error && <Text fontSize="sm">Erreur réseau ou analyse impossible</Text>}
+                        {!error && <Text fontSize="sm">Essayez de recadrer ou changer de position.</Text>}
+                    </>
+                ) : (
+                    <>
+                        <Icon as={CheckCircleIcon} w={10} h={10} color="green.300"/>
+                        <Text fontSize="2xl" fontWeight="bold">{artwork.title}</Text>
+                        <Text>{artwork.artist}</Text>
+                        <Text fontSize="sm">{artwork.description}</Text>
                     </>
                 )}
-            </div>
-        </div>
+
+                <Button onClick={onClose} colorScheme="teal">
+                    Fermer
+                </Button>
+            </VStack>
+        </Box>
     );
 };
 
