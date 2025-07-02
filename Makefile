@@ -59,20 +59,20 @@ clean:
 	docker compose down -v
 	docker system prune -f
 
-# NPM install
-npm-install:
-	docker run --rm -v $$(pwd)/frontend:/app -w /app node:24-alpine npm install
-
-# NPM build
-npm-build:
-	docker run --rm -v $$(pwd)/frontend:/app -w /app node:24-alpine npm run build
-
 # Initialize Weaviate with schema and sample data
 init-weaviate:
 	docker compose exec backend bash -c "PYTHONPATH=/app python scripts/init_weaviate.py"
 
-# Initialize SSL certificates for frontend
-init-ssl:
+# NPM install
+admin-npm-install:
+	docker run --rm -v $$(pwd)/frontend-admin:/app -w /app node:24-alpine npm install
+
+# NPM build
+admin-npm-build:
+	docker run --rm -v $$(pwd)/frontend-admin:/app -w /app node:24-alpine npm run build
+
+# Initialize SSL certificates for admin frontend
+admin-init-ssl:
 	sudo apt install libnss3-tools
 	curl -JLO "https://dl.filippo.io/mkcert/latest?for=linux/amd64"
 	chmod +x mkcert-v*-linux-amd64
@@ -80,8 +80,11 @@ init-ssl:
 	mkcert -install
 	@echo "SSL initialization script executed. Check the backend logs for details."
 
-	cd frontend && \
+	cd frontend-admin && \
 		mkdir -p certs && \
 		mkcert -key-file certs/key.pem -cert-file certs/cert.pem localhost 127.0.1 ::1 && \
 		cd ..
-	@echo "SSL certificates generated in frontend/certs. You can now run the application with SSL support."
+	@echo "SSL certificates generated in frontend-admin/certs. You can now run the application with SSL support."
+
+admin-sh:
+	docker compose exec frontend-admin sh
