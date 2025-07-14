@@ -37,6 +37,8 @@ services:
       - HTTPS=true
       - SSL_CRT_FILE=/app/certs/cert.pem
       - SSL_KEY_FILE=/app/certs/key.pem
+      - UID={UID:-1000}
+      - GID={GID:-1000}
     volumes:
       - ./frontend-admin:/app
     depends_on:
@@ -57,6 +59,7 @@ services:
     volumes:
       - ./backend:/app
       - ./backend/cache:/app/cache
+      - ./backend/uploads:/app/uploads
     networks:
       - art-detection-network
     depends_on:

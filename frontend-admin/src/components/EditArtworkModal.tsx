@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {
-    Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField
+    Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, Stack, TextField, Typography
 } from '@mui/material';
 
 type Props = {
@@ -15,7 +15,8 @@ const EditArtworkModal: React.FC<Props> = ({artwork, onClose, onUpdated, onDelet
         title: artwork.title || '',
         artist: artwork.artist || '',
         year: artwork.year || '',
-        description: artwork.description || ''
+        description: artwork.description || '',
+        uri: artwork.uri || ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -57,6 +58,14 @@ const EditArtworkModal: React.FC<Props> = ({artwork, onClose, onUpdated, onDelet
             <DialogTitle>Modifier l'œuvre</DialogTitle>
             <DialogContent>
                 <Stack spacing={2} mt={1}>
+                    <Box >
+                        {artwork.uri ? (
+                            <img src={artwork.uri} alt={artwork.title} style={{maxWidth: '100%', borderRadius: 8}} />
+                        ) : (
+                            <Typography variant="body2" color="textSecondary">(Aucun aperçu disponible)</Typography>
+                        )}
+                    </Box>
+
                     <TextField
                         label="Titre"
                         name="title"
