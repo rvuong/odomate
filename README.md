@@ -40,6 +40,8 @@ odomate/
 │   │   └── routes/           # FastAPI route handlers
 │   ├── scripts/              # Weaviate schema/data initialization
 │   ├── services/             # CLIP, Weaviate, image processing
+│   ├── uploads/
+│   │   └── artworks/
 │   ├── Dockerfile
 │   ├── main.py
 │   └── requirements.txt

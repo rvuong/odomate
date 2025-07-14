@@ -33,7 +33,7 @@ build:
 # Start the application without rebuilding containers
 start:
 	@echo "Starting the application..."
-	docker compose up -d
+	UID=$(id -u) GID=$(id -g) docker compose up -d
 	@echo "🚀 Application started on:"
 	@echo "   - Weaviate:        http://localhost:8080"
 	@echo "   - Backend:         http://localhost:8000"
@@ -43,7 +43,7 @@ start:
 # Start the application after rebuilding containers
 up:
 	@echo "Starting the application..."
-	docker compose up -d --build
+	UID=$(id -u) GID=$(id -g) docker compose up -d --build
 	@echo "🚀 Application started on:"
 	@echo "   - Weaviate:        http://localhost:8080"
 	@echo "   - Backend:         http://localhost:8000"

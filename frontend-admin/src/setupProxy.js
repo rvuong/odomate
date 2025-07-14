@@ -10,4 +10,12 @@ module.exports = function(app) {
             changeOrigin: true,
         })
     );
+
+    app.use(
+        '/uploads',
+        createProxyMiddleware({
+            target: 'http://backend:8000/',
+            changeOrigin: true,
+        })
+    );
 };
