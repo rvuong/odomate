@@ -1,3 +1,11 @@
+# [1.9.0](https://github.com/rvuong/odomate/compare/v1.8.0...v1.9.0) (2025-07-14)
+
+
+### Features
+
+* add an artwork preview in the admin backend ([33e210d](https://github.com/rvuong/odomate/commit/33e210ddd295f0da1a52d2c643719a393f1943a4))
+* add artwork preview in the admin ([8e242d6](https://github.com/rvuong/odomate/commit/8e242d617a6fa5a295aebb48cd5242d8cdc9ed7d))
+
 # [1.8.0](https://github.com/rvuong/odomate/compare/v1.7.0...v1.8.0) (2025-07-02)
 
 
