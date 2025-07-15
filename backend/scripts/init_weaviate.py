@@ -1,8 +1,11 @@
 import os
 import weaviate
-from PIL import Image
+from fastapi import UploadFile
+from io import BytesIO
 from pathlib import Path
+from PIL import Image
 from services.recognition import extract_image_embedding
+from services.storage import upload_artwork_image
 from weaviate.connect import ConnectionParams
 from weaviate.classes.config import Configure, DataType, Property
 
@@ -52,11 +55,18 @@ for img_path in sample_dir.glob("*.[jp][pn]g"):
     image = Image.open(img_path).convert("RGB")
     embedding = extract_image_embedding(image)
 
+    # Store the image in the upload folder
+    with open(img_path, "rb") as file:
+        image_bytes = file.read()
+    fake_upload = UploadFile(filename=img_path.name, file=BytesIO(image_bytes))
+    upload_result = upload_artwork_image(fake_upload, content=image_bytes)
+
     obj = {
         "title": img_path.stem,
         "artist": "Sample Artist",
         "year": 2023,
         "description": f"This is a sample artwork titled \"{img_path.stem}\".",
+        "uri": upload_result["image_uri"],
         "embedding": embedding.tolist(),
     }
 

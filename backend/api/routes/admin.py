@@ -2,6 +2,7 @@ from fastapi import APIRouter, File, Form, HTTPException, Path, Query, UploadFil
 from pydantic import BaseModel, constr
 from typing import List, Optional
 from services.recognition import extract_image_embedding
+from services.storage import upload_artwork_image
 from services.weaviate_client import get_all_artworks, get_weaviate_client
 from PIL import Image
 from io import BytesIO
@@ -15,9 +16,6 @@ router = APIRouter()
 async def list_artworks(limit: int = Query(100, le=500), offset: int = Query(0, ge=0)) -> List[dict]:
     return get_all_artworks(limit=limit, offset=offset)
 
-UPLOAD_FOLDER = "uploads/artworks"
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
-
 @router.post("/admin/artworks", tags=["artworks"])
 async def add_artwork(
     title: str = Form(...),
@@ -28,12 +26,14 @@ async def add_artwork(
  ) -> dict:
     # Read and vectorize the image
     image_bytes = await file.read()
+
+    # Store the image in the upload folder
     uploaded = upload_artwork_image(file, image_bytes)
 
+    # Add to weaviate
     image = Image.open(BytesIO(image_bytes)).convert("RGB")
     embedding = extract_image_embedding(image)
 
-    # Add to weaviate
     client = get_weaviate_client()
     client.connect()
     collection = client.collections.get("Artwork")
@@ -90,7 +90,7 @@ def upload_artwork_image(file: UploadFile = File(...), content: bytes = None) ->
 @router.delete("/admin/artworks/{artwork_id}", tags=["artworks"])
 async def delete_artwork(artwork_id: str = Path(...)) -> dict:
     logger = logging.getLogger(__name__)
-    
+
     client = get_weaviate_client()
     client.connect()
     collection = client.collections.get("Artwork")
