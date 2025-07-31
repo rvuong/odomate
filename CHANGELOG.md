@@ -1,3 +1,10 @@
+## [1.11.1](https://github.com/rvuong/odomate/compare/v1.11.0...v1.11.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* artwork images storage management ([7850be2](https://github.com/rvuong/odomate/commit/7850be2b473d9a606853a1bb43ebbf418be1d6e0))
+
 # [1.11.0](https://github.com/rvuong/odomate/compare/v1.10.0...v1.11.0) (2025-07-31)
 
 
