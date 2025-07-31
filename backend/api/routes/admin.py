@@ -46,7 +46,6 @@ async def add_artwork(
             "year": year,
             "description": description,
             "uri": uploaded["image_uri"],
-            "embedding": embedding.tolist(),
         },
         vector=embedding.tolist()
     )

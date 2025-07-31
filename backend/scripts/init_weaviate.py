@@ -14,6 +14,9 @@ print("Initializing Weaviate...")
 sample_dir = Path("scripts/sample")
 
 # Client initialization
+http_host = os.getenv("WEAVIATE_HTTP_HOST", "weaviate")
+http_port = int(os.getenv("WEAVIATE_HTTP_PORT", 8080))
+
 client = weaviate.WeaviateClient(
     connection_params=ConnectionParams.from_params(
         http_host="weaviate",
@@ -59,21 +62,37 @@ for img_path in sample_dir.glob("*.[jp][pn]g"):
     with open(img_path, "rb") as file:
         image_bytes = file.read()
     fake_upload = UploadFile(filename=img_path.name, file=BytesIO(image_bytes))
-    upload_result = upload_artwork_image(fake_upload, content=image_bytes)
+    uploaded = upload_artwork_image(fake_upload, content=image_bytes)
 
-    obj = {
-        "title": img_path.stem,
-        "artist": "Sample Artist",
-        "year": 2023,
-        "description": f"This is a sample artwork titled \"{img_path.stem}\".",
-        "uri": upload_result["image_uri"],
-        "embedding": embedding.tolist(),
-    }
+    # Custom values for specific artworks
+    match img_path.stem:
+        case "mona-lisa":
+            obj = {
+                "title": "La Joconde",
+                "artist": "Léonard de Vinci",
+                "year": 1506,
+                "description": "Portrait représentant une femme avec un sourire mystérieux, exposé au musée du Louvre à Paris.",
+                "uri": uploaded["image_uri"],
+            }
+        case "le-cri":
+            obj = {
+                "title": "Le Cri",
+                "artist": "Edvard Munch",
+                "year": 1917,
+                "description": "Peinture expressionniste représentant une figure hurlante sur un pont, symbole de l'angoisse humaine.",
+                "uri": uploaded["image_uri"],
+            }
+        case _:
+            obj = {
+                "title": img_path.stem,
+                "artist": "Unknown artist",
+                "year": 1970,
+                "description": "To be determined later.",
+                "uri": uploaded["image_uri"],
+            }
 
     client.collections.get("Artwork").data.insert(obj, vector=embedding.tolist())
     print(f"✅ \"{img_path.name}\" successfully inserted into Weaviate.")
-
-print("✅ Sample data successfully loaded.")
 
 # 4. Close the client connection
 client.close()
