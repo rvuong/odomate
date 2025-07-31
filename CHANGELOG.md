@@ -1,3 +1,11 @@
+# [1.10.0](https://github.com/rvuong/odomate/compare/v1.9.0...v1.10.0) (2025-07-31)
+
+
+### Features
+
+* save/delete artwork images ([0b42f46](https://github.com/rvuong/odomate/commit/0b42f465ea09e40a2decfadde3692b542f359e73))
+* save/delete artwork images ([7b37052](https://github.com/rvuong/odomate/commit/7b370521ef0ea163b7b4019d46b6e2a281e1b39a))
+
 # [1.9.0](https://github.com/rvuong/odomate/compare/v1.8.0...v1.9.0) (2025-07-14)
 
 
