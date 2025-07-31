@@ -1,3 +1,15 @@
+# [1.11.0](https://github.com/rvuong/odomate/compare/v1.10.0...v1.11.0) (2025-07-31)
+
+
+### Bug Fixes
+
+* artwork images storage management ([079390f](https://github.com/rvuong/odomate/commit/079390fdce9543cfee2ee12fbabacee9d7d8f903))
+
+
+### Features
+
+* add preview from initialized artworks ([f3c48c8](https://github.com/rvuong/odomate/commit/f3c48c8e3b9aebf3b2fa28f77627f9b22045bfc0))
+
 # [1.10.0](https://github.com/rvuong/odomate/compare/v1.9.0...v1.10.0) (2025-07-31)
 
 
