@@ -5,6 +5,7 @@ from services.recognition import extract_image_embedding
 from services.weaviate_client import get_all_artworks, get_weaviate_client
 from PIL import Image
 from io import BytesIO
+import logging
 import os
 import uuid
 
@@ -54,26 +55,26 @@ async def add_artwork(
 
     return {"status": "ok"}
 
+
 def upload_artwork_image(file: UploadFile = File(...), content: bytes = None) -> str:
-    # print(f"Uploading artwork image of size {len(file)} bytes...")
+    logger = logging.getLogger(__name__)
 
     # Generate a unique filename
     ext = os.path.splitext(file.filename)[-1].lower()
     unique_name = f"{uuid.uuid4()}{ext}"
 
-    print(f"* Unique filename generated: {unique_name}...")
+    logger.info(f"Unique filename generated: {unique_name}...")
 
     file_path = os.path.join(UPLOAD_FOLDER, unique_name)
-    print(f"* Saving file to {file_path}...")
+    logger.info(f"* Saving file to {file_path}...")
 
     # Save the file to the upload folder
-    # content = file.read()
-    print(f"* Received file {file.filename} of size {len(content)} bytes and content_type={file.content_type}")
+    logger.info(f"* Received file {file.filename} of size {len(content)} bytes and content_type={file.content_type}")
 
     try:
         image = Image.open(BytesIO(content)).convert("RGB")
     except Exception as e:
-        print(f"*** Error processing image: {e}")
+        logger.error(f"*** Error processing image: {e}")
         raise HTTPException(
             status_code=400,
             detail="Invalid image file."
@@ -88,18 +89,45 @@ def upload_artwork_image(file: UploadFile = File(...), content: bytes = None) ->
 
 @router.delete("/admin/artworks/{artwork_id}", tags=["artworks"])
 async def delete_artwork(artwork_id: str = Path(...)) -> dict:
+    logger = logging.getLogger(__name__)
+    
     client = get_weaviate_client()
     client.connect()
     collection = client.collections.get("Artwork")
 
     # Delete the artwork by UUID
     try:
+        logger.info(f"Deleting artwork with ID: {artwork_id}...")
+
+        # Get the artwork file name from the database, which is the URI
+        # and delete the file from the uploads directory
+        artwork = collection.query.fetch_object_by_id(artwork_id)
+        if not artwork:
+            raise HTTPException(
+                status_code=404,
+                detail=f"Artwork with ID {artwork_id} not found."
+            )
+        file_uri = artwork.properties.get('uri')
+
+        # Delete the artwork from Weaviate
         collection.data.delete_by_id(artwork_id)
-        print(f"Deleted artwork with ID: {artwork_id}")
+        logger.info(f"Deleted artwork with ID: {artwork_id}")
+
         client.close()
+
+        # Delete the image file from the uploads directory
+        if file_uri:
+            image_path = file_uri.lstrip('/')
+            if os.path.exists(image_path):
+                os.remove(image_path)
+                logger.info(f"Deleted image file: {image_path}")
+            else:
+                logger.warning(f"Image file not found: {image_path}")
+
         return {"status": "ok", "deleted_artwork_id": artwork_id}
+
     except Exception as e:
-        print(f"Error deleting artwork with ID {artwork_id}: {e}")
+        logger.error(f"Error deleting artwork with ID {artwork_id}: {e}")
 
         client.close()
         raise HTTPException(
